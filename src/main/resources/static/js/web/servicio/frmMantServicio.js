@@ -1,7 +1,7 @@
 $(document).on("click", "#btnagregar", function(){
     $("#txtdescservicio").val("");
     $("#txtprecio").val("");
-    $("#hddcodprod").val("0");
+    $("#hddcodservicio").val("0");
     $("#cboestado").empty();
 
     listarCboEstado(0);
@@ -11,7 +11,7 @@ $(document).on("click", "#btnagregar", function(){
 $(document).on("click", ".btnactualizar", function(){
     $("#txtdescservicio").val($(this).attr("data-descripcion"));
     $("#txtprecio").val($(this).attr("data-precio"));
-    $("#hddcodprod").val($(this).attr("data-codservicio"));
+    $("#hddcodservicio").val($(this).attr("data-codservicio"));
     $("#cboestado").empty();
     listarCboEstado($(this).attr("data-estado"));
     $("#modalNuevo").modal("show");
@@ -56,4 +56,33 @@ function listarCboEstado(idestado) {
             }
         }
     });
+}
+
+
+function listarServicios(){
+    $.ajax({
+        type: "GET",
+        url: "/servicio/listar",
+        dataType: "json",
+        success: function(resultado){
+            $("#tblservicio > tbody").html("");
+            $.each(resultado, function(index, value){
+                $("#tblservicio > tbody").append("<tr>"+
+                    "<td>"+value.idservicio +"</td>"+
+                    "<td>"+value.descripcion +"</td>"+
+                    "<td>"+value.precio +"</td>"+
+                    "<td>"+value.estado.estado +"</td>"+
+
+                    "<td>"+
+                        "<button type='button' class='btn btn-info btnactualizar'"+
+                                     "data-codservicio='"+value.idservicio+"'"+
+                                     "data-descripcion='"+value.descripcion+"'"+
+                                     "data-precio='"+value.precio+"'"+
+                                     "data-estado='"+value.estado.estado +"'"+
+
+                                     "><i class='fas fa-edit'></i></button>"+
+                    "</td></tr>");
+            })
+        }
+    })
 }
