@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "estado")
-public class Estado {
+@Table(name = "tipomascota")
+public class TipoMascota {
     @Id
-    private Integer idestado;
-    @Column(name = "estado")
-    private String estado;
+    private Integer idtipomascota;
+    @Column(name = "tipomascota")
+    private String tipomascota;
 }
