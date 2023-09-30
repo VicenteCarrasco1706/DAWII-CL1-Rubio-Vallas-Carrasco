@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script th:src="@{/js/web/veterinario/frmMantVeterinario.js}"
+        type="text/javascript"></script>
+<nav th:replace="~{layout::menu}"></nav>
+<div class="card ">
+    <div class="card-header text-bg-dark mb-3">
+        Mantenimiento de Veterinarios
+    </div>
+    <div class="card-body">
+        <button id="btnagregar"
+                type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+        <hr />
+        <div id="mensaje"></div>
+        <table id="tblveterinario" class="table">
+            <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">N° Documento</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vet :${listaVeterinario}">
+                <td th:text="${vet.idveterinario}"></td>
+                <td th:text="${vet.nombrecompleto}"></td>
+                <td th:text="${vet.numerodocumento}"></td>
+                <td th:text="${vet.correo}"></td>
+                <td th:text="${vet.especialidad.especialidad}"></td>
+                <td th:text="${vet.estado.estado}"></td>
+
+                <td>
+                    <button type="button" class="btn btn-info btnactualizar"
+                            th:data-codveterinario="${vet.idveterinario}"
+                            th:data-nombres="${vet.nombrecompleto}"
+                            th:data-nrodocumento="${vet.numerodocumento}"
+                            th:data-correo="${vet.correo}"
+                            th:data-especialidad="${vet.especialidad.idespecialidad}"
+                            th:data-estado="${vet.estado.idestado}"><i class="fas fa-edit"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Registrar / Actualizar Veterinario -->
+<div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Veterinario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="txtnombres" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="txtnombres">
+                </div>
+                <div class="mb-3">
+                    <label for="txtnrodocumento" class="form-label">N° Documento</label>
+                    <input type="text" class="form-control" id="txtnrodocumento">
+                </div>
+
+                <div class="mb-3">
+                    <label for="txtcorreo" class="form-label">Correo</label>
+                    <input type="text" class="form-control" id="txtcorreo">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="cboespecialidad" class="form-label">Especialidad</label>
+                    <select id="cboespecialidad" class="form-control"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cboestado" class="form-label">Estado</label>
+                    <select id="cboestado" class="form-control"></select>
+                </div>
+
+                <input type="hidden" id="hddcodveterinario" value="0">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" id="btnguardar" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
