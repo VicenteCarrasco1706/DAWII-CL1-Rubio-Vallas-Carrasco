@@ -34,7 +34,7 @@ public class ServicioContoller {
 
     @PostMapping("/guardar")
     @ResponseBody
-    public ResultadoResponse guardarProducto(
+    public ResultadoResponse guardarServicio(
             @RequestBody ServicioRequest servicioRequest
     ){
         return servicioService.guardarServicio(servicioRequest);

@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class Mascota {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer idmascota;
     @Column(name = "nombre")
     private String nombre;
@@ -24,7 +25,7 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "idtipomascota")
-    private TipoMascota tipoMascota;
+    private TipoMascota tipomascota;
     @ManyToOne
     @JoinColumn(name = "idestado")
     private Estado estado;
