@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.cibertec.DAWIICL1RubioVallasCarrasco.model.bd.Mascota;
+import pe.edu.cibertec.DAWIICL1RubioVallasCarrasco.model.request.MascotaRequest;
+import pe.edu.cibertec.DAWIICL1RubioVallasCarrasco.model.response.ResultadoResponse;
 import pe.edu.cibertec.DAWIICL1RubioVallasCarrasco.service.MascotaService;
 
 import java.util.List;
@@ -27,6 +29,12 @@ public class MascotaController {
         return mascotaService.listarMascotas();
     }
 
-
+    @PostMapping("/guardar")
+    @ResponseBody
+    public ResultadoResponse guardarMascota(
+            @RequestBody MascotaRequest mascotaRequest
+    ){
+        return mascotaService.guardarMascota(mascotaRequest);
+    }
 
 }
